@@ -27,38 +27,47 @@ public class MainFrame extends JFrame {
     private QuizButton buttonD = new QuizButton("answer D", "D");
     private JLabel questionLabel = new JLabel("Question?");
     
+    // ButtonA listener
     private final ActionListener answerListernerA = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click A!");
+            // add logic triggering
         }
     };
     
+    // ButtonB listener
     private final ActionListener answerListenerB = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click B!");
+            // add logic triggering
         }
     };
     
+    // ButtonC listener
     private final ActionListener answerListenerC = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click C!");
+            // add logic triggering
         }
     };
     
+    // ButtonD listener
     private final ActionListener answerListenerD = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click D!");
+            // add logic triggering
         }
     };
     
+    // Constructor
     public MainFrame() {
         super("Quiz");
         setSize(400,400);
@@ -103,6 +112,7 @@ public class MainFrame extends JFrame {
         this.add(southPanel);
     }
     
+    // Logic calls this method to set the new question
     public void setNewQuestion(String question, String a, String b, String c, String d){
         questionLabel.setText(question);
         buttonA.setText(a);
