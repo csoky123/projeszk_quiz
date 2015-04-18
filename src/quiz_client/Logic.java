@@ -9,5 +9,5 @@ package quiz_client;
  * @author zaasaai
  */
 public class Logic {
-    
+    private Integer a;
 }
