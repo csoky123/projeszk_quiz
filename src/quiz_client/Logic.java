@@ -10,4 +10,5 @@ package quiz_client;
  */
 public class Logic {
     private Integer a;
+    public int kecske;
 }
