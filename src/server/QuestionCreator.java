@@ -21,5 +21,7 @@ public class QuestionCreator {
         return null;
     };
     
-    
+    public Boolean isCorrect(String answer) {
+	return true;
+    }
 }
