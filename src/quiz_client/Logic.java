@@ -20,13 +20,20 @@ public class Logic {
         this. gui = gui;
     }
     
+    public void setQuestionGUI() {
+        gui.setNewQuestion(question, answers);
+        System.out.println("Logic: sent new question to GUI\n");
+    }
+    
     public String getQuestion() throws RemoteException {
         question = connection.nextQuestion();
+        System.out.println("Logic: new question requested from server\n");
         return question;
     }
     
     public ArrayList<String> getAnswers() throws RemoteException {
         answers = connection.getAnswers();
+        System.out.println("Logic: new answers requested from server\n");
         return answers;
     }
     
