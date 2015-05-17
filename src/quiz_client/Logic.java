@@ -19,8 +19,10 @@ public class Logic {
     }
     
     public void newQuestionRequest() throws RemoteException{
+        System.out.println("Logic: newQuestionRequest() - req new questions from srv");
         getQuestion();
         getAnswers();
+        System.out.println("Logic: newQuestionRequest() - send new question to GUI");
         setQuestionGUI();
     }
     

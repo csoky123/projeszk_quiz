@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
             System.out.println("Click A!");
             selectedAnswer = 0;
             try {
-                logic.correctAnswer(0);
+                result(logic.correctAnswer(0));
                 // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,7 +65,7 @@ public class MainFrame extends JFrame {
             System.out.println("Click B!");
             selectedAnswer = 1;
             try {
-                logic.correctAnswer(1);
+                result(logic.correctAnswer(1));
                 // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +81,7 @@ public class MainFrame extends JFrame {
             System.out.println("Click C!");
             selectedAnswer = 2;
             try {
-                logic.correctAnswer(2);
+                result(logic.correctAnswer(2));
                 // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +97,7 @@ public class MainFrame extends JFrame {
             System.out.println("Click D!");
             selectedAnswer = 3;
             try {
-                logic.correctAnswer(3);
+                result(logic.correctAnswer(3));
                 // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,6 +181,7 @@ public class MainFrame extends JFrame {
         revalidate();
         repaint();
         try {
+            System.out.println("MainFrame: init() - new question req from logic");
             logic.newQuestionRequest();
         } catch (RemoteException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,6 +207,8 @@ public class MainFrame extends JFrame {
             buttons.get(selectedAnswer).setBackground(Color.red);
             ++incorrectAnswers;
         }
+        revalidate();
+        repaint();
         
         try {
             TimeUnit.SECONDS.sleep(3);
