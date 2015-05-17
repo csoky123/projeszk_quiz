@@ -178,7 +178,7 @@ public class MainFrame extends JFrame {
     
     private void init(int firstStart){
         try {
-        if(firstStart == 1) TimeUnit.SECONDS.sleep(3);
+        if(firstStart == 0) TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException ex) {
         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
