@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
         }
         correctAnswers = 0;
         incorrectAnswers = 0;
-        //init();
+        init();
     }
     
     private void setGui() {
@@ -190,7 +190,7 @@ public class MainFrame extends JFrame {
     
     // Logic calls this method to set the new question
     public void setNewQuestion(String question, ArrayList<String> answers){
-        questionLabel.setText(question);
+        questionLabel.setText("<html>" + question + "</html>");
         buttons.get(0).setText(answers.get(0));
         buttons.get(1).setText(answers.get(1));
         buttons.get(2).setText(answers.get(2));
