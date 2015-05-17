@@ -4,6 +4,8 @@ package quiz_client;
 import ConnectionHandler.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import quiz_client.gui.MainFrame;
 
 public class Logic {
@@ -40,6 +42,7 @@ public class Logic {
     
     public ArrayList<String> getAnswers() throws RemoteException {
         answers = connection.getAnswers();
+        Collections.shuffle(answers);
         System.out.println("Logic: new answers requested from server\n");
         return answers;
     }
