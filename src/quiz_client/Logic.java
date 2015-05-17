@@ -20,6 +20,13 @@ public class Logic {
         this. gui = gui;
     }
     
+    public void newQuestionRequest(){
+        /* logika lekéri a servertől az új kérdés-választ
+            ide kell egy kis kód
+                */
+        setQuestionGUI();
+    }
+    
     public void setQuestionGUI() {
         gui.setNewQuestion(question, answers);
         System.out.println("Logic: sent new question to GUI\n");
@@ -37,8 +44,8 @@ public class Logic {
         return answers;
     }
     
-    public boolean correctAnswer(String answer) throws RemoteException {
-        if(answer.equals(connection.getCorrectAnswer())==true)
+    public boolean correctAnswer(int i) throws RemoteException {
+        if(answers.get(i).equals(connection.getCorrectAnswer())==true)
             return true;
         else return false;
     }

@@ -13,14 +13,14 @@ import javax.swing.JButton;
  */
 public class QuizButton extends JButton {
     
-    private String id;
+    private int id;
     
-    public QuizButton(String text, String id) {
+    public QuizButton(String text, int id) {
         super(text);
         this.id = id;
     }
     
-    public String getID(){
+    public int getID(){
         return id;
     }
     

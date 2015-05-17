@@ -11,10 +11,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import quiz_client.Logic;
 
 /**
@@ -23,21 +26,26 @@ import quiz_client.Logic;
  */
 public class MainFrame extends JFrame {
     
-    private QuizButton buttonA = new QuizButton("answer A", "A");
-    private QuizButton buttonB = new QuizButton("answer B", "B");
-    private QuizButton buttonC = new QuizButton("answer C", "C");
-    private QuizButton buttonD = new QuizButton("answer D", "D");
+    private QuizButton buttonA = new QuizButton("answer A", 0);
+    private QuizButton buttonB = new QuizButton("answer B", 1);
+    private QuizButton buttonC = new QuizButton("answer C", 2);
+    private QuizButton buttonD = new QuizButton("answer D", 3);
     private JLabel questionLabel = new JLabel("Question?");
     
     private Logic logic;
     
     // ButtonA listener
-    private final ActionListener answerListernerA = new ActionListener() {
+    private final ActionListener answerListenerA = new ActionListener() {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click A!");
-            // add logic triggering
+            try {
+                logic.correctAnswer(0);
+                // add logic triggering
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     };
     
@@ -47,7 +55,12 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click B!");
-            // add logic triggering
+            try {
+                logic.correctAnswer(1);
+                // add logic triggering
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     };
     
@@ -57,7 +70,12 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click C!");
-            // add logic triggering
+            try {
+                logic.correctAnswer(2);
+                // add logic triggering
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     };
     
@@ -67,9 +85,23 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click D!");
-            // add logic triggering
+            try {
+                logic.correctAnswer(3);
+                // add logic triggering
+            } catch (RemoteException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     };
+    /*
+    private final ActionListener answerListener = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("trigger logic with answer");
+            logic.testAnswer(e.)
+        }
+    };*/
     
     // Constructor
     public MainFrame() {
@@ -79,6 +111,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setGui();
         logic = new Logic(this);
+        init();
     }
     
     private void setGui() {
@@ -91,10 +124,15 @@ public class MainFrame extends JFrame {
         buttonB.setBackground(Color.YELLOW);
         buttonC.setBackground(Color.MAGENTA);
         buttonD.setBackground(Color.GREEN);
-        buttonA.addActionListener(answerListernerA);
+        
+        buttonA.addActionListener(answerListenerA);
         buttonB.addActionListener(answerListenerB);
         buttonC.addActionListener(answerListenerC);
         buttonD.addActionListener(answerListenerD);
+        /*buttonA.addActionListener(answerListener);
+        buttonB.addActionListener(answerListener);
+        buttonC.addActionListener(answerListener);
+        buttonD.addActionListener(answerListener);*/
         
         this.setLayout(new GridLayout(2, 1));
         
@@ -115,6 +153,10 @@ public class MainFrame extends JFrame {
         
         this.add(northPanel);
         this.add(southPanel);
+    }
+    
+    private void init(){
+        logic.newQuestionRequest();
     }
     
     // Logic calls this method to set the new question
