@@ -20,10 +20,9 @@ public class Logic {
         this. gui = gui;
     }
     
-    public void newQuestionRequest(){
-        /* logika lekéri a servertől az új kérdés-választ
-            ide kell egy kis kód
-                */
+    public void newQuestionRequest() throws RemoteException{
+        getQuestion();
+        getAnswers();
         setQuestionGUI();
     }
     
