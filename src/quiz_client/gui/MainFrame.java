@@ -5,6 +5,7 @@
  */
 package quiz_client.gui;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -16,8 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import quiz_client.Logic;
 
 /**
@@ -30,7 +33,11 @@ public class MainFrame extends JFrame {
     private QuizButton buttonB = new QuizButton("answer B", 1);
     private QuizButton buttonC = new QuizButton("answer C", 2);
     private QuizButton buttonD = new QuizButton("answer D", 3);
+    private ArrayList<QuizButton> buttons = new ArrayList<>();
     private JLabel questionLabel = new JLabel("Question?");
+    private int selectedAnswer;
+    private int correctAnswers;
+    private int incorrectAnswers;
     
     private Logic logic;
     
@@ -40,6 +47,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click A!");
+            selectedAnswer = 0;
             try {
                 logic.correctAnswer(0);
                 // add logic triggering
@@ -55,6 +63,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click B!");
+            selectedAnswer = 1;
             try {
                 logic.correctAnswer(1);
                 // add logic triggering
@@ -70,6 +79,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click C!");
+            selectedAnswer = 2;
             try {
                 logic.correctAnswer(2);
                 // add logic triggering
@@ -85,6 +95,7 @@ public class MainFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Click D!");
+            selectedAnswer = 3;
             try {
                 logic.correctAnswer(3);
                 // add logic triggering
@@ -111,28 +122,28 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setGui();
         logic = new Logic(this);
-        init();
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        //init();
     }
     
     private void setGui() {
         
-        buttonA.setFocusable(false);
-        buttonB.setFocusable(false);
-        buttonC.setFocusable(false);
-        buttonD.setFocusable(false);
-        buttonA.setBackground(Color.CYAN);
-        buttonB.setBackground(Color.YELLOW);
-        buttonC.setBackground(Color.MAGENTA);
-        buttonD.setBackground(Color.GREEN);
+        buttons.add(buttonA);
+        buttons.add(buttonB);
+        buttons.add(buttonC);
+        buttons.add(buttonD);
         
-        buttonA.addActionListener(answerListenerA);
-        buttonB.addActionListener(answerListenerB);
-        buttonC.addActionListener(answerListenerC);
-        buttonD.addActionListener(answerListenerD);
-        /*buttonA.addActionListener(answerListener);
-        buttonB.addActionListener(answerListener);
-        buttonC.addActionListener(answerListener);
-        buttonD.addActionListener(answerListener);*/
+        for(QuizButton qb : buttons){
+            qb.setFocusable(false);
+        }
+        clearButtonsColor();
+        
+        buttons.get(0).addActionListener(answerListenerA);
+        buttons.get(1).addActionListener(answerListenerB);
+        buttons.get(2).addActionListener(answerListenerC);
+        buttons.get(3).addActionListener(answerListenerD);
+        
         
         this.setLayout(new GridLayout(2, 1));
         
@@ -146,27 +157,54 @@ public class MainFrame extends JFrame {
         northPanel.add(questionLabel);
         
         southPanel.setLayout(new GridLayout(2, 2));
-        southPanel.add(buttonA);
-        southPanel.add(buttonB);
-        southPanel.add(buttonC);
-        southPanel.add(buttonD);
+        southPanel.add(buttons.get(0));
+        southPanel.add(buttons.get(1));
+        southPanel.add(buttons.get(2));
+        southPanel.add(buttons.get(3));
         
         this.add(northPanel);
         this.add(southPanel);
     }
     
+    private void clearButtonsColor(){
+        for(QuizButton qb : buttons){
+            qb.setBackground(Color.LIGHT_GRAY);
+        }
+    }
+    
     private void init(){
+        clearButtonsColor();
+        revalidate();
+        repaint();
         logic.newQuestionRequest();
     }
     
     // Logic calls this method to set the new question
     public void setNewQuestion(String question, ArrayList<String> answers){
         questionLabel.setText(question);
-        buttonA.setText(answers.get(0));
-        buttonB.setText(answers.get(1));
-        buttonC.setText(answers.get(2));
-        buttonD.setText(answers.get(3));
+        buttons.get(0).setText(answers.get(0));
+        buttons.get(1).setText(answers.get(1));
+        buttons.get(2).setText(answers.get(2));
+        buttons.get(3).setText(answers.get(3));
         revalidate();
         repaint();
+    }
+    
+    private void result(boolean b){
+        if(b) {
+            buttons.get(selectedAnswer).setBackground(Color.GREEN);
+            ++correctAnswers;
+        } else {
+            buttons.get(selectedAnswer).setBackground(Color.red);
+            ++incorrectAnswers;
+        }
+        
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        init();
     }
 }
