@@ -13,17 +13,14 @@ public class Logic {
     private ServerConnection connection;
     private MainFrame gui;
     
-    public Logic(MainFrame gui) {
-        try {
-            connection = new ServerConnection();
-        } catch (Exception e) {}
+    public Logic(MainFrame gui) throws Exception{
+        connection = new ServerConnection();
         this. gui = gui;
     }
     
-    public void newQuestionRequest(){
-        /* logika lekéri a servertől az új kérdés-választ
-            ide kell egy kis kód
-                */
+    public void newQuestionRequest() throws RemoteException{
+        getQuestion();
+        getAnswers();
         setQuestionGUI();
     }
     
