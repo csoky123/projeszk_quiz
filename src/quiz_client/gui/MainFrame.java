@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import quiz_client.Logic;
 
 /**
  *
@@ -27,6 +28,8 @@ public class MainFrame extends JFrame {
     private QuizButton buttonC = new QuizButton("answer C", "C");
     private QuizButton buttonD = new QuizButton("answer D", "D");
     private JLabel questionLabel = new JLabel("Question?");
+    
+    private Logic logic;
     
     // ButtonA listener
     private final ActionListener answerListernerA = new ActionListener() {
@@ -75,6 +78,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
+        logic = new Logic(this);
     }
     
     private void setGui() {

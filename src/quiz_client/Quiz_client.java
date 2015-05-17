@@ -4,6 +4,8 @@
  */
 package quiz_client;
 
+import quiz_client.gui.MainFrame;
+
 /**
  *
  * @author zaasaai
@@ -15,6 +17,7 @@ public class Quiz_client {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new MainFrame().setVisible(true);
         
     }
 }
