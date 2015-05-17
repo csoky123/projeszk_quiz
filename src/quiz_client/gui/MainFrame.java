@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.ArrayList;
 
 /**
  *
@@ -113,12 +114,12 @@ public class MainFrame extends JFrame {
     }
     
     // Logic calls this method to set the new question
-    public void setNewQuestion(String question, String a, String b, String c, String d){
+    public void setNewQuestion(String question, ArrayList<String> answers){
         questionLabel.setText(question);
-        buttonA.setText(a);
-        buttonB.setText(b);
-        buttonC.setText(c);
-        buttonD.setText(d);
+        buttonA.setText(answers.get(0));
+        buttonB.setText(answers.get(1));
+        buttonC.setText(answers.get(2));
+        buttonD.setText(answers.get(3));
         revalidate();
         repaint();
     }
