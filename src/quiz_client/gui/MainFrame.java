@@ -141,8 +141,7 @@ public class MainFrame extends JFrame {
         
         for(QuizButton qb : buttons){
             qb.setFocusable(false);
-            qb.setOpaque(false);
-            qb.setBorder(BorderFactory.createTitledBorder("JPanel#setOpaque(false)"));
+            //qb.setOpaque(false);
         }
         clearButtonsColor();
         
@@ -206,12 +205,14 @@ public class MainFrame extends JFrame {
     
     private void result(boolean b){
         if(b) {
-            buttons.get(selectedAnswer).setBackground(Color.GREEN);
-            buttons.get(selectedAnswer).repaint();
+            /*buttons.get(selectedAnswer).setBackground(Color.GREEN);
+            buttons.get(selectedAnswer).repaint();*/
+            JOptionPane.showMessageDialog(null, "Correct! :D");
             ++correctAnswers;
         } else {
-            buttons.get(selectedAnswer).setBackground(Color.red);
-            buttons.get(selectedAnswer).repaint();
+            /*buttons.get(selectedAnswer).setBackground(Color.red);
+            buttons.get(selectedAnswer).repaint();*/
+            JOptionPane.showMessageDialog(null, "Bad answer! :/");
             ++incorrectAnswers;
         }
         revalidate();
