@@ -190,7 +190,7 @@ public class MainFrame extends JFrame {
     
     // Logic calls this method to set the new question
     public void setNewQuestion(String question, ArrayList<String> answers){
-        questionLabel.setText("<html><div align=\"center\"><font size=\"6\">" + question + "</font></div></html>");
+        questionLabel.setText("<html><div align=\"center\"><font size=\"4\">" + question + "</font></div></html>");
         buttons.get(0).setText("<html><div align=\"center\">" + answers.get(0) + "</div></html>");
         buttons.get(1).setText("<html><div align=\"center\">" + answers.get(1) + "</div></html>");
         buttons.get(2).setText("<html><div align=\"center\">" + answers.get(2) + "</div></html>");
