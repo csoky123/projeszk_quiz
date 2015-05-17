@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
         }
         correctAnswers = 0;
         incorrectAnswers = 0;
-        init();
+        init(1);
     }
     
     private void setGui() {
@@ -176,7 +176,13 @@ public class MainFrame extends JFrame {
         }
     }
     
-    private void init(){
+    private void init(int firstStart){
+        try {
+        if(firstStart == 1) TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException ex) {
+        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         clearButtonsColor();
         revalidate();
         repaint();
@@ -211,13 +217,15 @@ public class MainFrame extends JFrame {
         }
         revalidate();
         repaint();
+        
         /*
         try {
-            TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                */
         
-        //init();
+        init(0);
     }
 }
