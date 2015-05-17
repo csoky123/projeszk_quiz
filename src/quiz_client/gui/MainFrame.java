@@ -177,17 +177,19 @@ public class MainFrame extends JFrame {
     }
     
     private void init(int firstStart){
-        try {
-        if(firstStart == 0) TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException ex) {
-        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
         clearButtonsColor();
         revalidate();
         repaint();
         try {
             System.out.println("MainFrame: init() - new question req from logic");
+            try {
+                if(firstStart == 0) TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             logic.newQuestionRequest();
         } catch (RemoteException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
