@@ -12,24 +12,30 @@ public class ServerConnection {
     private QuizQuestion currentQuestion;
     
     public ServerConnection() throws RemoteException, NotBoundException{
+        System.out.println("ServerConnection: Locate registry");
         Registry registry = LocateRegistry.getRegistry(9876);
+        System.out.println("ServerConnection: new question factory");
         questionFactory = (QuestionInterface)registry.lookup("srv");
     }
     
     public String nextQuestion() throws RemoteException {
+        System.out.println("ServerConnection: nextQuestion()");
         currentQuestion = questionFactory.getNewQuestion();
         return currentQuestion.getQuestion();
     };
     
     public ArrayList<String> getAnswers() {
+        System.out.println("ServerConnection: getAnswers()");
         return currentQuestion.getAnswers();
     };
     
     public Boolean isCorrect(String answer) throws RemoteException {
-	return questionFactory.isCorrect(answer);
+	       System.out.println("ServerConnection: isCorrect()");
+        return questionFactory.isCorrect(answer);
     }
     
     public String getCorrectAnswer() throws RemoteException {
+        System.out.println("ServerConnection: getCorrectAnswer()");
         return questionFactory.getCorrectAnswer();
     }
     

@@ -14,6 +14,7 @@ public class Logic {
     private MainFrame gui;
     
     public Logic(MainFrame gui) throws Exception{
+        System.out.println("Logic: try server connection");
         connection = new ServerConnection();
         this. gui = gui;
     }
