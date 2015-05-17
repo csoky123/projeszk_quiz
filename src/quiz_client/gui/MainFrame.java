@@ -185,10 +185,10 @@ public class MainFrame extends JFrame {
         try {
             System.out.println("MainFrame: init() - new question req from logic");
             try {
-                if(firstStart == 0) TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException ex) {
+                Thread.sleep(3);
+            } catch (InterruptedException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            }
             
             logic.newQuestionRequest();
         } catch (RemoteException ex) {
