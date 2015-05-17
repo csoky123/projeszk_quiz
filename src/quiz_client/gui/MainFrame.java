@@ -155,7 +155,7 @@ public class MainFrame extends JFrame {
         JPanel southPanel = new JPanel();
         
         northPanel.setLayout(new FlowLayout());
-        questionLabel.setPreferredSize(new Dimension(180, 180));
+        questionLabel.setPreferredSize(new Dimension(250, 180));
         questionLabel.setVerticalAlignment(JLabel.CENTER);
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
         northPanel.add(questionLabel);
@@ -190,11 +190,11 @@ public class MainFrame extends JFrame {
     
     // Logic calls this method to set the new question
     public void setNewQuestion(String question, ArrayList<String> answers){
-        questionLabel.setText("<html><div align=\"center\">" + question + "</div></html>");
-        buttons.get(0).setText(answers.get(0));
-        buttons.get(1).setText(answers.get(1));
-        buttons.get(2).setText(answers.get(2));
-        buttons.get(3).setText(answers.get(3));
+        questionLabel.setText("<html><div align=\"center\"><font size=\"6\">" + question + "</font></div></html>");
+        buttons.get(0).setText("<html><div align=\"center\">" + answers.get(0) + "</div></html>");
+        buttons.get(1).setText("<html><div align=\"center\">" + answers.get(1) + "</div></html>");
+        buttons.get(2).setText("<html><div align=\"center\">" + answers.get(2) + "</div></html>");
+        buttons.get(3).setText("<html><div align=\"center\">" + answers.get(3) + "</div></html>");
         revalidate();
         repaint();
     }
