@@ -13,10 +13,8 @@ public class Logic {
     private ServerConnection connection;
     private MainFrame gui;
     
-    public Logic(MainFrame gui) {
-        try {
-            connection = new ServerConnection();
-        } catch (Exception e) {}
+    public Logic(MainFrame gui) throws Exception{
+        connection = new ServerConnection();
         this. gui = gui;
     }
     
