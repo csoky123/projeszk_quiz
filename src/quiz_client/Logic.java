@@ -37,7 +37,11 @@ public class Logic {
         return answers;
     }
     
-    
+    public boolean correctAnswer(String answer) throws RemoteException {
+        if(answer.equals(connection.getCorrectAnswer())==true)
+            return true;
+        else return false;
+    }
     
     
 }

@@ -32,4 +32,5 @@ public class ServerConnection {
     public String getCorrectAnswer() throws RemoteException {
         return questionFactory.getCorrectAnswer();
     }
+    
 }
