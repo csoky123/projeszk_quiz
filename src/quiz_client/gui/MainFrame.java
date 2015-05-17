@@ -185,7 +185,7 @@ public class MainFrame extends JFrame {
         try {
             System.out.println("MainFrame: init() - new question req from logic");
             try {
-                Thread.sleep(3);
+                Thread.sleep(3000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
