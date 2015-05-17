@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.ArrayList;
+import quiz_client.Logic;
 
 /**
  *
@@ -26,6 +28,8 @@ public class MainFrame extends JFrame {
     private QuizButton buttonC = new QuizButton("answer C", "C");
     private QuizButton buttonD = new QuizButton("answer D", "D");
     private JLabel questionLabel = new JLabel("Question?");
+    
+    private Logic logic;
     
     // ButtonA listener
     private final ActionListener answerListernerA = new ActionListener() {
@@ -74,6 +78,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
+        logic = new Logic(this);
     }
     
     private void setGui() {
@@ -113,12 +118,12 @@ public class MainFrame extends JFrame {
     }
     
     // Logic calls this method to set the new question
-    public void setNewQuestion(String question, String a, String b, String c, String d){
+    public void setNewQuestion(String question, ArrayList<String> answers){
         questionLabel.setText(question);
-        buttonA.setText(a);
-        buttonB.setText(b);
-        buttonC.setText(c);
-        buttonD.setText(d);
+        buttonA.setText(answers.get(0));
+        buttonB.setText(answers.get(1));
+        buttonC.setText(answers.get(2));
+        buttonD.setText(answers.get(3));
         revalidate();
         repaint();
     }
