@@ -202,9 +202,11 @@ public class MainFrame extends JFrame {
     private void result(boolean b){
         if(b) {
             buttons.get(selectedAnswer).setBackground(Color.GREEN);
+            buttons.get(selectedAnswer).repaint();
             ++correctAnswers;
         } else {
             buttons.get(selectedAnswer).setBackground(Color.red);
+            buttons.get(selectedAnswer).repaint();
             ++incorrectAnswers;
         }
         revalidate();
