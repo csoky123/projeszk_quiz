@@ -218,12 +218,12 @@ public class MainFrame extends JFrame {
         revalidate();
         repaint();
         
-        
+        /*
         try {
         TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException ex) {
         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
                 
         
         init();
