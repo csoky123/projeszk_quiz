@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import quiz_client.Logic;
 
@@ -141,6 +142,7 @@ public class MainFrame extends JFrame {
         for(QuizButton qb : buttons){
             qb.setFocusable(false);
             qb.setOpaque(false);
+            qb.setBorder(BorderFactory.createTitledBorder("JPanel#setOpaque(false)"));
         }
         clearButtonsColor();
         
