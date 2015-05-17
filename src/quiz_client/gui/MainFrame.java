@@ -121,7 +121,11 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
-        logic = new Logic(this);
+        try {
+            logic = new Logic(this);
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         correctAnswers = 0;
         incorrectAnswers = 0;
         //init();
@@ -176,7 +180,11 @@ public class MainFrame extends JFrame {
         clearButtonsColor();
         revalidate();
         repaint();
-        logic.newQuestionRequest();
+        try {
+            logic.newQuestionRequest();
+        } catch (RemoteException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // Logic calls this method to set the new question
