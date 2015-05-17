@@ -128,7 +128,7 @@ public class MainFrame extends JFrame {
         }
         correctAnswers = 0;
         incorrectAnswers = 0;
-        init(1);
+        init();
     }
     
     private void setGui() {
@@ -176,7 +176,7 @@ public class MainFrame extends JFrame {
         }
     }
     
-    private void init(int firstStart){
+    private void init(){
         
         
         clearButtonsColor();
@@ -184,12 +184,6 @@ public class MainFrame extends JFrame {
         repaint();
         try {
             System.out.println("MainFrame: init() - new question req from logic");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
             logic.newQuestionRequest();
         } catch (RemoteException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,6 +222,6 @@ public class MainFrame extends JFrame {
         }
                 */
         
-        init(0);
+        init();
     }
 }
