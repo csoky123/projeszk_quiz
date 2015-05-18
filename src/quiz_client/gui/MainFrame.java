@@ -6,7 +6,6 @@
 package quiz_client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,16 +18,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
 import quiz_client.Logic;
 
 /**
@@ -60,7 +56,6 @@ public class MainFrame extends JFrame {
             selectedAnswer = 0;
             try {
                 result(logic.correctAnswer(0));
-                // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -76,7 +71,6 @@ public class MainFrame extends JFrame {
             selectedAnswer = 1;
             try {
                 result(logic.correctAnswer(1));
-                // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -92,7 +86,6 @@ public class MainFrame extends JFrame {
             selectedAnswer = 2;
             try {
                 result(logic.correctAnswer(2));
-                // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -108,21 +101,11 @@ public class MainFrame extends JFrame {
             selectedAnswer = 3;
             try {
                 result(logic.correctAnswer(3));
-                // add logic triggering
             } catch (RemoteException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     };
-    /*
-    private final ActionListener answerListener = new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("trigger logic with answer");
-            logic.testAnswer(e.)
-        }
-    };*/
     
     // Constructor
     public MainFrame() {
@@ -159,9 +142,9 @@ public class MainFrame extends JFrame {
             }
         });
         
-        JMenuItem eMenuItem = new JMenuItem("Exit");
-        eMenuItem.setToolTipText("Exit from application");
-        eMenuItem.addActionListener(new ActionListener() {
+        JMenuItem exitGame = new JMenuItem("Exit");
+        exitGame.setToolTipText("Exit from application");
+        exitGame.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -169,11 +152,9 @@ public class MainFrame extends JFrame {
             }
         });
         
-        
-        
         file.add(newGame);
         file.add(new JSeparator());
-        file.add(eMenuItem);
+        file.add(exitGame);
         menubar.add(file);
         
         setJMenuBar(menubar);
@@ -188,7 +169,6 @@ public class MainFrame extends JFrame {
         
         for(QuizButton qb : buttons){
             qb.setFocusable(false);
-            //qb.setOpaque(false);
         }
         clearButtonsColor();
         
@@ -197,8 +177,6 @@ public class MainFrame extends JFrame {
         buttons.get(2).addActionListener(answerListenerC);
         buttons.get(3).addActionListener(answerListenerD);
         
-        
-        //this.setLayout(new GridLayout(2, 1));
         this.setLayout(new BorderLayout());
         
         JPanel northPanel = new JPanel();
@@ -318,6 +296,5 @@ public class MainFrame extends JFrame {
         repaint();
 
         if(b) JOptionPane.showMessageDialog(null, "Congratulations, your result is " + correctAnswers + " out of 10 questions! :D");
-        //newGame();
     }
 }
