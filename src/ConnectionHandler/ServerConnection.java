@@ -1,26 +1,42 @@
 package ConnectionHandler;
 
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class ServerConnection {
+public class ServerConnection extends Thread {
     
-    private QuestionInterface questionFactory;
     private QuizQuestion currentQuestion;
+
+    final String IP = "localhost";
+    final int PORT = 4567;
+    Socket s;
+    Scanner sc;
+    PrintWriter pw;
+
     
-    public ServerConnection() throws RemoteException, NotBoundException{
-        System.out.println("ServerConnection: Locate registry");
-        Registry registry = LocateRegistry.getRegistry(9876);
-        System.out.println("ServerConnection: new question factory");
-        questionFactory = (QuestionInterface)registry.lookup("srv");
+    public ServerConnection() throws IOException {
+        s = new Socket(IP, PORT);
+        sc = new Scanner(s.getInputStream());
+        pw = new PrintWriter(s.getOutputStream());
     }
     
-    public String nextQuestion() throws RemoteException {
+    public String nextQuestion() {
         System.out.println("ServerConnection: nextQuestion()");
-        currentQuestion = questionFactory.getNewQuestion();
+        pw.println("new");
+        pw.println("getQuestion");
+        pw.flush();
+        
+        String question = sc.nextLine();
+        ArrayList<String> answers = new ArrayList();
+        answers.add(sc.nextLine());
+        answers.add(sc.nextLine());
+        answers.add(sc.nextLine());
+        answers.add(sc.nextLine());
+        
+        currentQuestion = new QuizQuestion(question, answers);
         return currentQuestion.getQuestion();
     };
     
@@ -29,14 +45,19 @@ public class ServerConnection {
         return currentQuestion.getAnswers();
     };
     
-    public Boolean isCorrect(String answer) throws RemoteException {
-	       System.out.println("ServerConnection: isCorrect()");
-        return questionFactory.isCorrect(answer);
+    public Boolean isCorrect(String answer) {
+	System.out.println("ServerConnection: isCorrect()");
+        pw.println("isCorrect");
+        pw.println(answer);
+        pw.flush();
+        return sc.nextInt() == 1;
     }
     
-    public String getCorrectAnswer() throws RemoteException {
+    public String getCorrectAnswer() {
         System.out.println("ServerConnection: getCorrectAnswer()");
-        return questionFactory.getCorrectAnswer();
+        pw.println("getCorrectAnswer");
+        pw.flush();
+        return sc.nextLine();
     }
     
 }

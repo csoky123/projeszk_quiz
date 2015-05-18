@@ -1,11 +1,10 @@
 package ConnectionHandler;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class QuizQuestion implements Serializable{
-    private String question;
-    private ArrayList<String> answers;
+public class QuizQuestion{
+    private final String question;
+    private final ArrayList<String> answers;
 
     public String getQuestion() {
         return question;
