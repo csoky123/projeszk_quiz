@@ -53,5 +53,4 @@ public class Logic {
         else return false;
     }
     
-    
 }
