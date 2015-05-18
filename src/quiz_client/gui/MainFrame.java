@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +23,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import quiz_client.Logic;
 
 /**
@@ -121,10 +127,11 @@ public class MainFrame extends JFrame {
     // Constructor
     public MainFrame() {
         super("Quiz - by Team 21");
-        setSize(400,450);
+        setSize(400,470);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
+        createMenuBar();
         try {
             logic = new Logic(this);
         } catch (Exception ex) {
@@ -132,7 +139,44 @@ public class MainFrame extends JFrame {
         }
         correctAnswers = 0;
         incorrectAnswers = 0;
-        init();
+        endGame(false);
+    }
+    
+    private void createMenuBar(){
+        JMenuBar menubar = new JMenuBar();
+        
+        JMenu file = new JMenu("File");
+        file.setMnemonic(KeyEvent.VK_F);
+        
+        JMenuItem newGame = new JMenuItem("New game");
+        newGame.setToolTipText("Start a new game");
+        newGame.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("NEW GAME!");
+                newGame();
+            }
+        });
+        
+        JMenuItem eMenuItem = new JMenuItem("Exit");
+        eMenuItem.setToolTipText("Exit from application");
+        eMenuItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
+        
+        
+        file.add(newGame);
+        file.add(new JSeparator());
+        file.add(eMenuItem);
+        menubar.add(file);
+        
+        setJMenuBar(menubar);
     }
     
     private void setGui() {
@@ -144,7 +188,6 @@ public class MainFrame extends JFrame {
         
         for(QuizButton qb : buttons){
             qb.setFocusable(false);
-            qb.setForeground(Color.BLACK);
             //qb.setOpaque(false);
         }
         clearButtonsColor();
@@ -195,12 +238,13 @@ public class MainFrame extends JFrame {
     private void clearButtonsColor(){
         for(QuizButton qb : buttons){
             qb.setBackground(Color.ORANGE);
+            qb.setForeground(Color.BLACK);
         }
     }
     
     private void init(){
         
-        
+        statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
         clearButtonsColor();
         revalidate();
         repaint();
@@ -225,25 +269,55 @@ public class MainFrame extends JFrame {
     
     private void result(boolean b){
         if(b) {
-            JOptionPane.showMessageDialog(null, "Correct! :D");
+
             ++correctAnswers;            
         } else {
-            JOptionPane.showMessageDialog(null, "Bad answer! :/");
+
             ++incorrectAnswers;
         }
         statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
 
+        if(b) {
+            JOptionPane.showMessageDialog(null, "Correct! :D");
+          
+        } else {
+            JOptionPane.showMessageDialog(null, "Bad answer! :/");
+
+        }
+        
+        if(correctAnswers + incorrectAnswers == 10) endGame(true);
+        else {
+            revalidate();
+            repaint();
+
+            init();
+        }
+    }
+    
+    private void newGame(){
+        
+        for(QuizButton qb : buttons)
+        {
+            qb.setEnabled(true);
+        }
+        clearButtonsColor();
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        // init
+        init();
+    }
+    
+    private void endGame(boolean b){
+        for(QuizButton qb : buttons){
+            qb.setEnabled(false);
+            qb.setText("");
+        }
+        questionLabel.setText("");
+        statsLabel.setText("");
         revalidate();
         repaint();
-        
-        /*
-        try {
-        TimeUnit.SECONDS.sleep(3);
-        } catch (InterruptedException ex) {
-        Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-                
-        
-        init();
+
+        if(b) JOptionPane.showMessageDialog(null, "Congratulations, your result is " + correctAnswers + " out of 10 questions! :D");
+        //newGame();
     }
 }
