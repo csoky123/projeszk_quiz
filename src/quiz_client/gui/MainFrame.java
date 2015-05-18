@@ -5,6 +5,7 @@
  */
 package quiz_client.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,15 +31,17 @@ import quiz_client.Logic;
  */
 public class MainFrame extends JFrame {
     
+    private int selectedAnswer = 0;
+    private int correctAnswers = 0;
+    private int incorrectAnswers = 0;
     private QuizButton buttonA = new QuizButton("answer A", 0);
     private QuizButton buttonB = new QuizButton("answer B", 1);
     private QuizButton buttonC = new QuizButton("answer C", 2);
     private QuizButton buttonD = new QuizButton("answer D", 3);
     private ArrayList<QuizButton> buttons = new ArrayList<>();
     private JLabel questionLabel = new JLabel("Question?");
-    private int selectedAnswer;
-    private int correctAnswers;
-    private int incorrectAnswers;
+    private JLabel statsLabel = new JLabel("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers + "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>" );
+    
     
     private Logic logic;
     
@@ -118,7 +121,7 @@ public class MainFrame extends JFrame {
     // Constructor
     public MainFrame() {
         super("Quiz - by Team 21");
-        setSize(400,400);
+        setSize(400,450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
@@ -141,6 +144,7 @@ public class MainFrame extends JFrame {
         
         for(QuizButton qb : buttons){
             qb.setFocusable(false);
+            qb.setForeground(Color.BLACK);
             //qb.setOpaque(false);
         }
         clearButtonsColor();
@@ -151,15 +155,21 @@ public class MainFrame extends JFrame {
         buttons.get(3).addActionListener(answerListenerD);
         
         
-        this.setLayout(new GridLayout(2, 1));
+        //this.setLayout(new GridLayout(2, 1));
+        this.setLayout(new BorderLayout());
         
         JPanel northPanel = new JPanel();
         JPanel southPanel = new JPanel();
+        JPanel quizPanel  = new JPanel();
+        JPanel scorePanel = new JPanel();
+        
+        quizPanel.setLayout(new GridLayout(2, 1));
         
         northPanel.setLayout(new FlowLayout());
         questionLabel.setPreferredSize(new Dimension(250, 180));
         questionLabel.setVerticalAlignment(JLabel.CENTER);
         questionLabel.setHorizontalAlignment(JLabel.CENTER);
+        questionLabel.setForeground(Color.WHITE);
         northPanel.add(questionLabel);
         
         southPanel.setLayout(new GridLayout(2, 2));
@@ -168,13 +178,23 @@ public class MainFrame extends JFrame {
         southPanel.add(buttons.get(2));
         southPanel.add(buttons.get(3));
         
-        this.add(northPanel);
-        this.add(southPanel);
+        scorePanel.setLayout(new GridLayout(1,1));
+        scorePanel.setSize(100, 100);
+        scorePanel.add(statsLabel);
+        statsLabel.setHorizontalAlignment(JLabel.CENTER);
+        
+        quizPanel.add(northPanel);
+        quizPanel.add(southPanel);
+        
+        this.add(quizPanel, BorderLayout.NORTH);
+        this.add(scorePanel, BorderLayout.SOUTH);
+        
+        northPanel.setBackground(Color.DARK_GRAY);
     }
     
     private void clearButtonsColor(){
         for(QuizButton qb : buttons){
-            qb.setBackground(Color.LIGHT_GRAY);
+            qb.setBackground(Color.ORANGE);
         }
     }
     
@@ -205,16 +225,14 @@ public class MainFrame extends JFrame {
     
     private void result(boolean b){
         if(b) {
-            /*buttons.get(selectedAnswer).setBackground(Color.GREEN);
-            buttons.get(selectedAnswer).repaint();*/
             JOptionPane.showMessageDialog(null, "Correct! :D");
-            ++correctAnswers;
+            ++correctAnswers;            
         } else {
-            /*buttons.get(selectedAnswer).setBackground(Color.red);
-            buttons.get(selectedAnswer).repaint();*/
             JOptionPane.showMessageDialog(null, "Bad answer! :/");
             ++incorrectAnswers;
         }
+        statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
+
         revalidate();
         repaint();
         
