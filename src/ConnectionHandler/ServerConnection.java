@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ServerConnection extends Thread {
+public class ServerConnection {
     
     private QuizQuestion currentQuestion;
 
@@ -32,7 +32,7 @@ public class ServerConnection extends Thread {
      * @return Az új kérdés
      */
     public String nextQuestion() {
-        System.out.println("ServerConnection: nextQuestion()");
+        //System.out.println("ServerConnection: nextQuestion()");
         pw.println("new");
         pw.println("getQuestion");
         pw.flush();
@@ -53,7 +53,7 @@ public class ServerConnection extends Thread {
      * @return A válaszok egy ArrayList objektumban
      */
     public ArrayList<String> getAnswers() {
-        System.out.println("ServerConnection: getAnswers()");
+        //System.out.println("ServerConnection: getAnswers()");
         return currentQuestion.getAnswers();
     };
     
@@ -63,7 +63,7 @@ public class ServerConnection extends Thread {
      * @return Igaz, ha helyes, hamis, ha nem.
      */
     public Boolean isCorrect(String answer) {
-	System.out.println("ServerConnection: isCorrect()");
+	//System.out.println("ServerConnection: isCorrect()");
         pw.println("isCorrect");
         pw.println(answer);
         pw.flush();
@@ -75,10 +75,19 @@ public class ServerConnection extends Thread {
      * @return A helyes válasz.
      */
     public String getCorrectAnswer() {
-        System.out.println("ServerConnection: getCorrectAnswer()");
+        //System.out.println("ServerConnection: getCorrectAnswer()");
         pw.println("getCorrectAnswer");
         pw.flush();
         return sc.nextLine();
     }
     
+    /**
+     * lezárja a kapcsolatot a szerver felé
+     * @throws IOException 
+     */
+    public void quit() throws IOException {
+        pw.println("quit");
+        pw.flush();
+        s.close();
+    }
 }
