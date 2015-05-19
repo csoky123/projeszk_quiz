@@ -82,7 +82,7 @@ public class ServerConnection {
     }
     
     /**
-     * lezárja a kapcsolatot a szerver felé
+     * Lezárja a kapcsolatot a szerver felé.
      * @throws IOException 
      */
     public void quit() throws IOException {
