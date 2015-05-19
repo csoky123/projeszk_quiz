@@ -29,9 +29,9 @@ public class Logic {
     }
     
     /**
-     * Lekér a szervertől egy kérdést és a hozzá tartozó válaszokat.
-     * Meghívja a setQuestionGUI() függvényt.
-     * @throws RemoteException 
+     * Meghívja a getQuestion és a getAnswers függvényeket.
+     * Meghívja a setQuestionGUI függvényt.
+     * @throws IOException 
      */
     public void newQuestionRequest() throws IOException{
         System.out.println("Logic: newQuestionRequest() - req new questions from srv");
@@ -48,7 +48,12 @@ public class Logic {
         System.out.println("Logic: sent new question to GUI\n");
     }
     
-    public String getQuestion() throws RemoteException {
+    /**
+     * Lekér a szervertől egy kérdést.
+     * @return a kérdés String-ként
+     * @throws IOException 
+     */
+    public String getQuestion() throws IOException {
         question = connection.nextQuestion();
         System.out.println("Logic: new question requested from server\n");
         return question;
