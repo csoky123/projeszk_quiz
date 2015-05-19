@@ -40,7 +40,9 @@ public class Logic {
         System.out.println("Logic: newQuestionRequest() - send new question to GUI");
         setQuestionGUI();
     }
-    
+    /**
+     * Logic elküldi a lekérdezett kérdést és válaszokat a guinak.
+     */
     public void setQuestionGUI() {
         gui.setNewQuestion(question, answers);
         System.out.println("Logic: sent new question to GUI\n");
