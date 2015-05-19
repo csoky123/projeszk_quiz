@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import quiz_client.gui.MainFrame;
+import java.io.*;
 
 public class Logic {
 
@@ -27,7 +28,12 @@ public class Logic {
         this. gui = gui;
     }
     
-    public void newQuestionRequest() throws RemoteException{
+    /**
+     * Lekér a szervertől egy kérdést és a hozzá tartozó válaszokat.
+     * Meghívja a setQuestionGUI() függvényt.
+     * @throws RemoteException 
+     */
+    public void newQuestionRequest() throws IOException{
         System.out.println("Logic: newQuestionRequest() - req new questions from srv");
         getQuestion();
         getAnswers();
