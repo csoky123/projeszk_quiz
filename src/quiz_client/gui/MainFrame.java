@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
     private int selectedAnswer = 0;
     private int correctAnswers = 0;
     private int incorrectAnswers = 0;
+    private String correctAns = "";
     private QuizButton buttonA = new QuizButton("answer A", 0);
     private QuizButton buttonB = new QuizButton("answer B", 1);
     private QuizButton buttonC = new QuizButton("answer C", 2);
@@ -259,7 +260,13 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "Correct! :D");
           
         } else {
-            JOptionPane.showMessageDialog(null, "Bad answer! :/");
+            boolean b2 = false;
+            int i = 0;
+            while(!b2 && i<4){
+                if(logic.correctAnswer(i)) correctAns = buttons.get(i).getText();
+                ++i;
+            }
+            JOptionPane.showMessageDialog(null, "Wrong answer! :/\nThe correct answer is: " + correctAns);
 
         }
         
