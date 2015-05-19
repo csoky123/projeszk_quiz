@@ -15,14 +15,28 @@ public class QuizButton extends JButton {
     
     private int id;
     
+    /**
+     * a QuizButton konstruktora, származtatva a JButton osztályból.
+     * @param text
+     * @param id 
+     */
     public QuizButton(String text, int id) {
         super(text);
         this.id = id;
     }
-    
+    /**
+     * A QuizButton példányának ID lekérő metódusa.
+     * @return 
+     */
     public int getID(){
         return id;
     }
-    
+    /**
+     * A QuizButton példányának ID beállító metódusa.
+     * @param ID 
+     */
+    public void setID(int ID){
+        this.id = ID;
+    }
     
 }

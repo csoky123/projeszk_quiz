@@ -13,7 +13,7 @@ import quiz_client.gui.MainFrame;
 public class Quiz_client {
 
     /**
-     * @param args the command line arguments
+     * A Quiz kliens fő osztálya, inicializálja a Quiz GUI-t.
      */
     public static void main(String[] args) {
         // TODO code application logic here

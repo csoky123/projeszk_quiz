@@ -48,7 +48,10 @@ public class MainFrame extends JFrame {
     
     private Logic logic;
     
-    // ButtonA listener
+    /**
+     * Az A válaszgomb ActionListener-je, lekéri a logikától helyes-e a válasz,
+     * továbbá az eredményt kiértékelésre küldi.
+     */
     private final ActionListener answerListenerA = new ActionListener() {
 
         @Override
@@ -63,7 +66,10 @@ public class MainFrame extends JFrame {
         }
     };
     
-    // ButtonB listener
+    /**
+     * A B válaszgomb ActionListener-je, lekéri a logikától helyes-e a válasz,
+     * továbbá az eredményt kiértékelésre küldi.
+     */
     private final ActionListener answerListenerB = new ActionListener() {
 
         @Override
@@ -78,7 +84,10 @@ public class MainFrame extends JFrame {
         }
     };
     
-    // ButtonC listener
+    /**
+     * A C válaszgomb ActionListener-je, lekéri a logikától helyes-e a válasz,
+     * továbbá az eredményt kiértékelésre küldi.
+     */
     private final ActionListener answerListenerC = new ActionListener() {
 
         @Override
@@ -93,7 +102,10 @@ public class MainFrame extends JFrame {
         }
     };
     
-    // ButtonD listener
+    /**
+     * A D válaszgomb ActionListener-je, lekéri a logikától helyes-e a válasz,
+     * továbbá az eredményt kiértékelésre küldi.
+     */
     private final ActionListener answerListenerD = new ActionListener() {
 
         @Override
@@ -108,7 +120,9 @@ public class MainFrame extends JFrame {
         }
     };
     
-    // Constructor
+    /**
+     * A Quiz GUI fő frame-jének a konstruktora, létrehozza a grafikus felületet.
+     */
     public MainFrame() {
         super("Quiz - by Team 21");
         setSize(400,470);
@@ -126,6 +140,10 @@ public class MainFrame extends JFrame {
         endGame(false);
     }
     
+    /**
+     * Létrehozza és hozzácsatolja a menüsort az ablakhoz, betölti a menübe a 
+     * választható opciókat.
+     */
     private void createMenuBar(){
         JMenuBar menubar = new JMenuBar();
         
@@ -165,6 +183,11 @@ public class MainFrame extends JFrame {
         setJMenuBar(menubar);
     }
     
+    /**
+     * Felépíti az ablak (JFrame) grafikáját, hozzáadja a komponenseket,
+     * konkrétan a kérdés JLabel-t, a négy válaszgomb QuizButton-t és az
+     * eredmény JLabel-t. Beállítja azok kinézetét.
+     */
     private void setGui() {
         
         buttons.add(buttonA);
@@ -218,6 +241,9 @@ public class MainFrame extends JFrame {
         northPanel.setBackground(Color.DARK_GRAY);
     }
     
+    /**
+     * Beállítja a válaszgombok színeit.
+     */
     private void clearButtonsColor(){
         for(QuizButton qb : buttons){
             qb.setBackground(Color.ORANGE);
@@ -225,6 +251,11 @@ public class MainFrame extends JFrame {
         }
     }
     
+    /**
+     * Új kérdés inicializálása, azaz a logikától kér egy kérdést négy darab 
+     * lehetséges válasszal.
+     * @throws IOException 
+     */
     private void init() throws IOException{
         
         statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
@@ -235,7 +266,13 @@ public class MainFrame extends JFrame {
         logic.newQuestionRequest();
     }
     
-    // Logic calls this method to set the new question
+    /**
+     * logika számára használatos metódus, amivel beállítja a kérdést és a 
+     * négy válaszlehetőséget a kérdés JLabel-be és a válaszgombokba.
+     * @param question
+     * @param answers 
+     */
+    
     public void setNewQuestion(String question, ArrayList<String> answers){
         questionLabel.setText("<html><div align=\"center\"><font size=\"5\">" + question + "</font></div></html>");
         buttons.get(0).setText("<html><div align=\"center\">" + answers.get(0) + "</div></html>");
@@ -246,12 +283,16 @@ public class MainFrame extends JFrame {
         repaint();
     }
     
+    /**
+     * A felhasználó válaszának kiértékelését megjelenítő metódus. 
+     * Üzen a felhasználónak egy MessageBox-szal a válasza helyességéről.
+     * @param b
+     * @throws IOException 
+     */
     private void result(boolean b) throws IOException{
         if(b) {
-
             ++correctAnswers;            
         } else {
-
             ++incorrectAnswers;
         }
         statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
@@ -279,6 +320,10 @@ public class MainFrame extends JFrame {
         }
     }
     
+    /**
+     * Új játék inicializálása. 
+     * @throws IOException 
+     */
     private void newGame() throws IOException{
         
         for(QuizButton qb : buttons)
@@ -292,6 +337,11 @@ public class MainFrame extends JFrame {
         init();
     }
     
+    /**
+     * Jelen futó játék befejezése és a végeredmény grafikus közlése a 
+     * felhasználóval.
+     * @param b 
+     */
     private void endGame(boolean b){
         for(QuizButton qb : buttons){
             qb.setEnabled(false);
