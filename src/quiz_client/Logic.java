@@ -83,6 +83,10 @@ public class Logic {
         else return false;
     }
     
+    /**
+     * Megszakítja a kapcsolatot a szerverrel.
+     * @throws IOException 
+     */
     public void exitServer() throws IOException{
         connection.quit();
     }
