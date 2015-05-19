@@ -71,7 +71,13 @@ public class Logic {
         return answers;
     }
     
-    public boolean correctAnswer(int i) throws RemoteException {
+    /**
+     * Leellenőrzi egy kérdésről, hogy az-e a helyes válasz.
+     * @param i a válaszok közül az egyik indexe
+     * @return igaz vagy hamis atttól függően, hogy a paraméterben kapott válasz(azon az indexen található) helyes-e
+     * @throws IOException 
+     */
+    public boolean correctAnswer(int i) throws IOException {
         if(answers.get(i).equals(connection.getCorrectAnswer())==true)
             return true;
         else return false;
