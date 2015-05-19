@@ -59,7 +59,12 @@ public class Logic {
         return question;
     }
     
-    public ArrayList<String> getAnswers() throws RemoteException {
+    /**
+     * Lekéri a szervertől a válaszokat. A lekért válaszokat random sorrendbe rakja.
+     * @return a random sorrendbe rendezett válaszok egy ArrayList-ben tárolva
+     * @throws IOException 
+     */
+    public ArrayList<String> getAnswers() throws IOException {
         answers = connection.getAnswers();
         Collections.shuffle(answers);
         System.out.println("Logic: new answers requested from server\n");
