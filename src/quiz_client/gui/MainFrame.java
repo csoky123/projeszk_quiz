@@ -125,7 +125,7 @@ public class MainFrame extends JFrame {
      */
     public MainFrame() {
         super("Quiz - by Team 21");
-        setSize(400,470);
+        setSize(600,470);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
