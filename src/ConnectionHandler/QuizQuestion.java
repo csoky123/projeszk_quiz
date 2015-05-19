@@ -17,7 +17,7 @@ public class QuizQuestion{
 
     /**
      * A függvény visszaadja a jelenlegi lehetséges válaszokat.
-     * @return A válaszok egy ArrayList<String> objektumban
+     * @return A válaszok egy "ArrayList String" objektumban
      */
     public ArrayList<String> getAnswers() {
         return answers;
