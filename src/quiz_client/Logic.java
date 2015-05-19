@@ -14,7 +14,13 @@ public class Logic {
     private ArrayList<String> answers = new ArrayList<>();
     private ServerConnection connection;
     private MainFrame gui;
-    
+    /**
+     * A Logic osztály pédányosítani egy gui osztály segítségével lehet.
+     * <p>
+     * Létrehozza a kapcsolatot a szerverrel.
+     * @param gui MainFrame példány
+     * @throws Exception IOException
+     */
     public Logic(MainFrame gui) throws Exception{
         System.out.println("Logic: try server connection");
         connection = new ServerConnection();
