@@ -13,7 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.rmi.RemoteException;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
             selectedAnswer = 0;
             try {
                 result(logic.correctAnswer(0));
-            } catch (RemoteException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
             selectedAnswer = 1;
             try {
                 result(logic.correctAnswer(1));
-            } catch (RemoteException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
             selectedAnswer = 2;
             try {
                 result(logic.correctAnswer(2));
-            } catch (RemoteException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
             selectedAnswer = 3;
             try {
                 result(logic.correctAnswer(3));
-            } catch (RemoteException ex) {
+            } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -138,7 +138,11 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("NEW GAME!");
-                newGame();
+                try {
+                    newGame();
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -220,18 +224,14 @@ public class MainFrame extends JFrame {
         }
     }
     
-    private void init(){
+    private void init() throws IOException{
         
         statsLabel.setText("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers+  "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>");     
         clearButtonsColor();
         revalidate();
         repaint();
-        try {
-            System.out.println("MainFrame: init() - new question req from logic");
-            logic.newQuestionRequest();
-        } catch (RemoteException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println("MainFrame: init() - new question req from logic");
+        logic.newQuestionRequest();
     }
     
     // Logic calls this method to set the new question
@@ -245,7 +245,7 @@ public class MainFrame extends JFrame {
         repaint();
     }
     
-    private void result(boolean b){
+    private void result(boolean b) throws IOException{
         if(b) {
 
             ++correctAnswers;            
@@ -272,7 +272,7 @@ public class MainFrame extends JFrame {
         }
     }
     
-    private void newGame(){
+    private void newGame() throws IOException{
         
         for(QuizButton qb : buttons)
         {
