@@ -15,7 +15,7 @@ public class Logic {
     private ServerConnection connection;
     private MainFrame gui;
     /**
-     * A Logic osztály pédányosítani egy gui osztály segítségével lehet.
+     * A Logic osztályt pédányosítani egy gui osztály segítségével lehet.
      * <p>
      * Létrehozza a kapcsolatot a szerverrel.
      * @param gui MainFrame példány
