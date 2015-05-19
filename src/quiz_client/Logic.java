@@ -83,4 +83,8 @@ public class Logic {
         else return false;
     }
     
+    public void exitServer() throws IOException{
+        connection.quit();
+    }
+    
 }
