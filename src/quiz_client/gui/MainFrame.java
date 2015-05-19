@@ -42,6 +42,7 @@ public class MainFrame extends JFrame {
     private QuizButton buttonC = new QuizButton("answer C", 2);
     private QuizButton buttonD = new QuizButton("answer D", 3);
     private ArrayList<QuizButton> buttons = new ArrayList<>();
+    private ArrayList<String> anwsers = new ArrayList<>();
     private JLabel questionLabel = new JLabel("Question?");
     private JLabel statsLabel = new JLabel("<html><font size=\"6\" color=\"green\">Correct: " + correctAnswers + "      </font><font size=\"6\" color=\"red\">Incorrect: " + incorrectAnswers + "</font></html>" );
     
@@ -125,7 +126,7 @@ public class MainFrame extends JFrame {
      */
     public MainFrame() {
         super("Quiz - by Team 21");
-        setSize(600,470);
+        setSize(835,470);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setGui();
@@ -171,6 +172,7 @@ public class MainFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 System.exit(0);
             }
         });
@@ -274,6 +276,7 @@ public class MainFrame extends JFrame {
      */
     
     public void setNewQuestion(String question, ArrayList<String> answers){
+        this.anwsers = answers;
         questionLabel.setText("<html><div align=\"center\"><font size=\"5\">" + question + "</font></div></html>");
         buttons.get(0).setText("<html><div align=\"center\">" + answers.get(0) + "</div></html>");
         buttons.get(1).setText("<html><div align=\"center\">" + answers.get(1) + "</div></html>");
@@ -304,7 +307,7 @@ public class MainFrame extends JFrame {
             boolean b2 = false;
             int i = 0;
             while(!b2 && i<4){
-                if(logic.correctAnswer(i)) correctAns = buttons.get(i).getText();
+                if(logic.correctAnswer(i)) correctAns = anwsers.get(i);
                 ++i;
             }
             JOptionPane.showMessageDialog(null, "Wrong answer! :/\nThe correct answer is: " + correctAns);
